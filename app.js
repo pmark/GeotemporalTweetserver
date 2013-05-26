@@ -37,7 +37,6 @@ var BASE_URL = "https://api.twitter.com/1.1",
     oauth;
 
 function request(req, res, url) {
-    console.log("config", config);
     
     var query = qs.stringify(req.query).replace(rCallbackParam, ""),
         cached;
