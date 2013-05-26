@@ -88,7 +88,6 @@ app.get("/", function(req, res) {
     res.send("tweetserver");
 });
 
-/*
 app.get("/:family/:method?", function (req, res) {
     var params = req.params,
         family = params.family,
@@ -101,10 +100,6 @@ app.get("/:family/:method?", function (req, res) {
         res.send(404); // All requests that do not match an item in the `allowed` list will return a 404
     }
 });
-*/
-
-console.log("process.env.PORT:", process.env.PORT);
-
 
 http.createServer(app).listen(app.get("port"), function() {
     console.log("tweetserver is now listening on port " + app.get("port"));
