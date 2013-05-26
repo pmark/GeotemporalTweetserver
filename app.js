@@ -3,7 +3,7 @@
 var fs = require("fs")
 
 var config = { 
-	"port": process.env.PORT || 5000,
+	"port": process.env.PORT || 5002,
     "auth": {
         "accessToken": process.env.TWITTER_OAUTH_ACCESS_TOKEN,
         "accessSecret": process.env.TWITTER_OAUTH_ACCESS_SECRET,
@@ -11,6 +11,8 @@ var config = {
         "consumerSecret": process.env.TWITTER_OAUTH_CONSUMER_SECRET
     }
 };
+
+console.log("process.env.PORT:", process.env.PORT);
 
 if (!config.auth.accessToken || !config.auth.accessSecret || !config.auth.consumerKey || !config.auth.consumerSecret) {
 	// Try reading the config file
@@ -88,6 +90,7 @@ app.get("/", function(req, res) {
     res.send("tweetserver");
 });
 
+/*
 app.get("/:family/:method?", function (req, res) {
     var params = req.params,
         family = params.family,
@@ -100,7 +103,9 @@ app.get("/:family/:method?", function (req, res) {
         res.send(404); // All requests that do not match an item in the `allowed` list will return a 404
     }
 });
+*/
 
-http.createServer(app).listen(app.get("port"), function() {
-    console.log("tweetserver is now listening on port " + app.get("port"));
+http.createServer(app).listen(process.env.PORT || 5001, function() {
+    console.log("tweetserver is now listening on port " + process.env.PORT);
+    // console.log("tweetserver is now listening on port " + app.get("port"));
 });
