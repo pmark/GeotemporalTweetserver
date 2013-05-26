@@ -1,12 +1,22 @@
-var express = require("express");
-var app = express();
-app.use(express.logger());
+var fs = require("fs")
 
-app.get('/', function(request, response) {
-  response.send('Hello World!');
-});
+var config = { 
+	"port": 5000,
+    "auth": {
+        "accessToken": process.env.TWITTER_OAUTH_ACCESS_TOKEN,
+        "accessSecret": process.env.TWITTER_OAUTH_ACCESS_SECRET,
+        "consumerKey": process.env.TWITTER_OAUTH_CONSUMER_KEY,
+        "consumerSecret": process.env.TWITTER_OAUTH_CONSUMER_SECRET
+    }
+};
 
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+if (!config.auth.accessToken || !config.auth.accessSecret || !config.auth.consumerKey || !config.auth.consumerSecret) {
+	// Try reading the config file
+	console.log("Reading twitter oauth config from .tweetserverrc file.");
+	JSON.parse(fs.readFileSync(".tweetserverrc", "utf8"));	
+}
+else {
+	console.log("Using twitter oauth config from environment variables.");
+}
+
+require("./lib/tweetserver/app")(config);
