@@ -3,7 +3,7 @@
 var fs = require("fs")
 
 var config = { 
-	"port": 5000,
+	"port": process.env.PORT || 5000,
     "auth": {
         "accessToken": process.env.TWITTER_OAUTH_ACCESS_TOKEN,
         "accessSecret": process.env.TWITTER_OAUTH_ACCESS_SECRET,
