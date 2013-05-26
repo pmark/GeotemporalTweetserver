@@ -13,7 +13,7 @@ var config = {
 if (!config.auth.accessToken || !config.auth.accessSecret || !config.auth.consumerKey || !config.auth.consumerSecret) {
 	// Try reading the config file
 	console.log("Reading twitter oauth config from .tweetserverrc file.");
-	JSON.parse(fs.readFileSync(".tweetserverrc", "utf8"));	
+	config = JSON.parse(fs.readFileSync(".tweetserverrc", "utf8"));	
 }
 else {
 	console.log("Using twitter oauth config from environment variables.");
